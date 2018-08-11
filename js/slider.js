@@ -60,7 +60,7 @@
 		});
 
 		
-		// 4. Найти кнопки переключения radio-button, посчитать.
+		// 4. Найти кнопки переключения radio-button
 		// - навесить обработчик событий
 		sliderRadioButton.on('click', function(event) {
 			event.preventDefault();
@@ -71,20 +71,16 @@
 				.siblings().removeClass('ba-slider__radio-button--active');	
 
 			var activeSliderRadioButtonIndex = sliderRadioButton.index( this ) + 1;
-			// activeSliderRadioButtonIndex.addClass('ba-slider__radio-button--active')
 
 			var translateSize = (1 - activeSliderRadioButtonIndex) * slideWidth
-				sliderContainer.css(
-					'transform',
-					'translateX(' + translateSize + 'px)'
-				);
+			sliderContainer.css(
+				'transform',
+				'translateX(' + translateSize + 'px)'
+			);
 
 			currentSlideIndex = activeSliderRadioButtonIndex;
 		});
-
-
 		
 	});
 
-	
 })();
