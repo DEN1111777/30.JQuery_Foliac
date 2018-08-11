@@ -486,8 +486,23 @@ textarea {
 	display: flex;
 	transition: all 1s ease-out;
 }
+.ba-slider__wrapper{
+	position: relative;
+}
 .ba-slider__item{
 	flex-basis: 1140px;
 	flex-shrink: 0;
 	text-align: center;
+}
+.ba-slider__radio-buttons-wrapper {
+	display: flex;
+	justify-content: center;
+}
+.ba-slider__radio-button {
+	margin: 50px 20px 0 20px;
+}
+.ba-slider__radio-button--active{
+	background-color: #48BF72;
+	color: white;
+	font-weight: bold;
 }

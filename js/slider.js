@@ -28,13 +28,17 @@
 		var sliderCount = slides.length;
 		var currentSlideIndex = 1;
 		var slideWidth = parseInt(slides.css('width'), 10);
+		var nextSlideIndex;
+		var sliderRadioButton = $('.ba-slider__radio-button');
+		var activeSliderRadioButton = $('.ba-slider__radio-button--active');
 		// 3. Навесить обработчики кликов на кнопки переключения слайдов:
 		//  - переключать слайды с помощью transform: translateX().
 		sliderButtons.on('click', function(event) {
 			event.preventDefault();
 			
 			var buttonDirection = $(this).data('direction');
-			var nextSlideIndex = currentSlideIndex + buttonDirectionObject[buttonDirection];
+			nextSlideIndex = currentSlideIndex + buttonDirectionObject[buttonDirection];
+
 
 			if (nextSlideIndex === 0) {
 				nextSlideIndex = sliderCount
@@ -44,6 +48,9 @@
 				nextSlideIndex = 1
 			}
 
+			var nextSliderRadioButton = sliderRadioButton.eq(nextSlideIndex - 1);
+			nextSliderRadioButton.addClass('ba-slider__radio-button--active').siblings().removeClass('ba-slider__radio-button--active');
+
 			var translateSize = (1 - nextSlideIndex) * slideWidth
 			sliderContainer.css(
 				'transform',
@@ -51,6 +58,33 @@
 			);
 			currentSlideIndex = nextSlideIndex;
 		});
+
+		
+		// 4. Найти кнопки переключения radio-button, посчитать.
+		// - навесить обработчик событий
+		sliderRadioButton.on('click', function(event) {
+			event.preventDefault();
+			
+			// Добавлять/убирать класс active кнопкам
+			$(this)
+				.addClass('ba-slider__radio-button--active')
+				.siblings().removeClass('ba-slider__radio-button--active');	
+
+			var activeSliderRadioButtonIndex = sliderRadioButton.index( this ) + 1;
+			// activeSliderRadioButtonIndex.addClass('ba-slider__radio-button--active')
+
+			var translateSize = (1 - activeSliderRadioButtonIndex) * slideWidth
+				sliderContainer.css(
+					'transform',
+					'translateX(' + translateSize + 'px)'
+				);
+
+			currentSlideIndex = activeSliderRadioButtonIndex;
+		});
+
+
+		
 	});
 
+	
 })();
